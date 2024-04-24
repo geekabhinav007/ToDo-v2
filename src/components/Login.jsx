@@ -26,9 +26,12 @@ function Login() {
         signInWithEmailAndPassword(auth, email, password)
         .then(() => {
             navigate("/dashboard");
+            event.preventDefault();
+
           })
           .catch(
             (error) => {
+                console.log("Not Valid User")
                 alert("Please Check Your Credentials", error.message)
             }
         )
