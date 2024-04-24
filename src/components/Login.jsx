@@ -7,9 +7,18 @@ import {useNavigate} from 'react-router-dom'
 function Login() {
 
     const navigate = useNavigate()
-
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+
+    // Stay on page if loged in
+
+    useEffect(() => {
+        auth.onAuthStateChanged((user) =>{
+            if(user){
+                navigate('/dashboard')
+            }
+        })
+    }, [])
 
     // Setting Email
     const handleEmailChange = (e) => {
