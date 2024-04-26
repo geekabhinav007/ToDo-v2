@@ -92,6 +92,15 @@ function Dashboard() {
 
     return (
         <section className="bg-gray-50 dark:bg-gray-900 h-screen">
+<nav className="flex items-center justify-between flex-wrap bg-gray-900 p-6">
+    <div className="flex items-center flex-shrink-0 text-white mr-6">
+        <span className="font-semibold text-xl tracking-tight">Dashboard</span>
+    </div>
+    <div>
+        <button onClick={handleSignOut} class=" text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 flex-no-shrink p-2 border-2 cursor-pointer">Logout</button>
+    </div>
+</nav>
+
             <div class=" flex justify-center">
                 <input
                     class=" m-5 shadow appearance-none border rounded w-1/2 py-2 px-3 text-grey-darker"
@@ -138,7 +147,6 @@ function Dashboard() {
                     </div>
 
 
-                    <button onClick={handleSignOut} class=" mt-5 text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 flex-no-shrink p-2 border-2 cursor-pointer">Logout</button>
                 </div>
             </div>
         </section>
