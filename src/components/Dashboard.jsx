@@ -15,6 +15,7 @@ function Dashboard() {
     const [tempUidd, setTempUidd] = useState("");
     const navigate = useNavigate();
     const [searchTerm, setSearchTerm] = useState("");
+    const [loading, setLoading] = useState(true);
 
 
 
@@ -34,8 +35,10 @@ function Dashboard() {
 
     // handle protection of unauthorised access of auth route
 
+
+ 
     useEffect(() => {
-        auth.onAuthStateChanged((user) => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
             if (user) {
                 // read
                 onValue(ref(db, `/${auth.currentUser.uid}`), (snapshot) => {
@@ -48,12 +51,25 @@ function Dashboard() {
                         setTodos(newTodos);
                     }
                 });
+                setLoading(false);
             } else if (!user) {
                 navigate("/");
+                setLoading(false);
             }
         });
+
+        // Cleanup subscription on unmount
+        return () => unsubscribe();
     }, [navigate]);
 
+
+    // To handle Loading Page UI
+    if (loading) {
+        return (
+            <div>Loading ...</div>
+        );
+    }
+    
 
     // add
     const writeToDatabase = () => {
