@@ -15,6 +15,7 @@ function Dashboard() {
     const [tempUidd, setTempUidd] = useState("");
     const navigate = useNavigate();
     const [searchTerm, setSearchTerm] = useState("");
+    const [loading, setLoading] = useState(true);
 
 
 
@@ -34,8 +35,10 @@ function Dashboard() {
 
     // handle protection of unauthorised access of auth route
 
+
+ 
     useEffect(() => {
-        auth.onAuthStateChanged((user) => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
             if (user) {
                 // read
                 onValue(ref(db, `/${auth.currentUser.uid}`), (snapshot) => {
@@ -48,12 +51,37 @@ function Dashboard() {
                         setTodos(newTodos);
                     }
                 });
+                setLoading(false);
             } else if (!user) {
                 navigate("/");
+                setLoading(false);
             }
         });
+
+        // Cleanup subscription on unmount
+        return () => unsubscribe();
     }, [navigate]);
 
+
+    // To handle Loading Page UI
+    if (loading) {
+        return (
+            <section className="bg-gray-50 dark:bg-gray-900 h-screen">
+                <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+                    <div className="bg-white rounded shadow p-6 m-4 w-full lg:w-3/4 lg:max-w-lg">
+                        <div class="flex justify-center items-center space-x-2">
+                            <svg class="w-5 h-5 text-blue-500 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            <div>Loading...</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        );
+    }
+    
 
     // add
     const writeToDatabase = () => {
