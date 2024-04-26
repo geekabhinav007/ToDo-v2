@@ -93,14 +93,14 @@ function Dashboard() {
     return (
         <section className="bg-gray-50 dark:bg-gray-900 h-screen">
             <div class=" flex justify-center">
-    <input
-        class=" m-5 shadow appearance-none border rounded w-1/2 py-2 px-3 text-grey-darker"
-        type="text"
-        placeholder="Search todos..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-    />
-</div>
+                <input
+                    class=" m-5 shadow appearance-none border rounded w-1/2 py-2 px-3 text-grey-darker"
+                    type="text"
+                    placeholder="Search todos..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
+            </div>
 
 
             <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -108,24 +108,23 @@ function Dashboard() {
                     <img className="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo" />
                     Welcome
                 </a>
-                <div className="bg-white rounded shadow p-6 m-4 w-full lg:w-3/4 lg:max-w-lg">
-                    <div class="mb-4">
+                <div className="bg-white rounded shadow p-6 m-4 w-full lg:w-3/4 lg:max-w-lg overflow-auto max-h-96">                    <div class="mb-4">
 
-                        <div class="flex mt-4">
-                            <input
-                                class="shadow appearance-none border rounded w-full py-2 px-3 mr-4 text-grey-darker"
-                                type="text"
-                                placeholder="Add todo..."
-                                value={todo}
-                                onChange={(e) => setTodo(e.target.value)}
-                            />
-                            {isEdit ? (
-                                <button onClick={handleEditConfirm} class=" text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 flex-no-shrink p-2 border-2  ">Update</button>
-                            ) : (
-                                <button onClick={writeToDatabase} class=" text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 flex-no-shrink p-2 border-2  ">Add</button>
-                            )}
-                        </div>
+                    <div class="flex mt-4">
+                        <input
+                            class="shadow appearance-none border rounded w-full py-2 px-3 mr-4 text-grey-darker"
+                            type="text"
+                            placeholder="Add todo..."
+                            value={todo}
+                            onChange={(e) => setTodo(e.target.value)}
+                        />
+                        {isEdit ? (
+                            <button onClick={handleEditConfirm} class=" text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 flex-no-shrink p-2 border-2  ">Update</button>
+                        ) : (
+                            <button onClick={writeToDatabase} class=" text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 flex-no-shrink p-2 border-2  ">Add</button>
+                        )}
                     </div>
+                </div>
                     <div>
                         {todos.filter((todo) => todo.todo.toLowerCase().includes(searchTerm.toLowerCase())).map((todo) => (
                             <div class="flex mb-4 items-center">
