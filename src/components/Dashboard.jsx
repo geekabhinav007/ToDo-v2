@@ -14,6 +14,8 @@ function Dashboard() {
     const [isEdit, setIsEdit] = useState(false);
     const [tempUidd, setTempUidd] = useState("");
     const navigate = useNavigate();
+    const [searchTerm, setSearchTerm] = useState("");
+
 
 
 
@@ -90,6 +92,14 @@ function Dashboard() {
 
     return (
         <section className="bg-gray-50 dark:bg-gray-900 h-screen">
+            <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 mr-4 text-grey-darker"
+                type="text"
+                placeholder="Search todos..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+            />
+
             <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
                 <a className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
                     <img className="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo" />
@@ -114,7 +124,7 @@ function Dashboard() {
                         </div>
                     </div>
                     <div>
-                        {todos.map((todo) => (
+                        {todos.filter((todo) => todo.todo.toLowerCase().includes(searchTerm.toLowerCase())).map((todo) => (
                             <div class="flex mb-4 items-center">
                                 <p class="w-full text-grey-darkest">{todo.todo}</p>
                                 <div class="flex flex-row flex-nowrap">
@@ -124,6 +134,8 @@ function Dashboard() {
                             </div>
                         ))}
                     </div>
+
+
                     <button onClick={handleSignOut} class=" mt-5 text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 flex-no-shrink p-2 border-2 cursor-pointer">Logout</button>
                 </div>
             </div>
